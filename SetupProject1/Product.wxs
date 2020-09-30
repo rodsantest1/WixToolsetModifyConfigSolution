@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define WpfApp1_TargetDir=$(var.WpfApp1.TargetDir)?>
+	<Product Id="*" Name="SetupProject1" Language="1033" Version="1.0.0.0" Manufacturer="rcs" UpgradeCode="ebab8524-c3d8-438b-8016-4b99532eca76">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+		<Feature Id="ProductFeature" Title="SetupProject1" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="SetupProject1" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Id="WpfApp1.exe.config" Guid="2948052e-de18-4feb-b964-981882131b6f">
+			  <File Id="WpfApp1.exe.config" Name="WpfApp1.exe.config" Source="$(var.WpfApp1_TargetDir)WpfApp1.exe.config" />
+			</Component>
+			<Component Id="WpfApp1.exe" Guid="3c05b65d-af77-4d2b-86c8-2d2bce05e6f5">
+			  <File Id="WpfApp1.exe" Name="WpfApp1.exe" Source="$(var.WpfApp1_TargetDir)WpfApp1.exe" />
+			</Component>
+			<Component Id="Newtonsoft.Json.dll" Guid="79b2b635-7e09-4c32-b3f1-11d966dfe7db">
+			  <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.WpfApp1_TargetDir)Newtonsoft.Json.dll" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
